@@ -1,6 +1,5 @@
 const handler = async (event) => {
   console.debug("Lambda ejecutada correctamente");
-  console.debug("Fin de ejecución");
   return {
     statusCode: 200,
     headers: {
