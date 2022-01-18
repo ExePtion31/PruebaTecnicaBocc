@@ -1,5 +1,10 @@
-const handler = async (event) => {
+exports.handler = async (event) => {
   console.debug("Lambda ejecutada correctamente");
+  const arrayGroups = event.body;
+  return buildResponse(arrayGroups);
+};
+
+function buildResponse(body) {
   return {
     statusCode: 200,
     headers: {
@@ -7,8 +12,6 @@ const handler = async (event) => {
       "Access-Control-Allow-Headers": "Content-Type",
       "Access-Control-Allow-Origin": "*",
     },
-    body: JSON.stringify("Célula de ahorros"),
+    body: body,
   };
-};
-
-exports.handler = handler;
+}
