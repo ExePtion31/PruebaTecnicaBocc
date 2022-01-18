@@ -25,3 +25,17 @@ resource "aws_api_gateway_integration" "integration" {
   type                    = "AWS_PROXY"
   uri                     = aws_lambda_function.lambda_groups.invoke_arn
 }
+
+resource "aws_api_gateway_method_response" "response_200" {
+  rest_api_id = aws_api_gateway_rest_api.api_gateway.id
+  resource_id = aws_api_gateway_resource.api_gateway_resource.id
+  http_method = aws_api_gateway_method.api_gateway_get_method.http_method
+  status_code = "200"
+}
+
+resource "aws_api_gateway_integration_response" "api_gateway_integration_response" {
+  rest_api_id = aws_api_gateway_rest_api.api_gateway.id
+  resource_id = aws_api_gateway_resource.api_gateway_resource.id
+  http_method = aws_api_gateway_method.api_gateway_get_method.http_method
+  status_code = aws_api_gateway_method_response.response_200.status_code
+}
