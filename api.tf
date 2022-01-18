@@ -58,14 +58,3 @@ resource "aws_api_gateway_stage" "deployment_groups_api" {
   rest_api_id   = aws_api_gateway_rest_api.api_gateway.id
   stage_name    = "deployment-groups-api"
 }
-
-resource "aws_api_gateway_method_settings" "deployment_settings_method" {
-  rest_api_id = aws_api_gateway_rest_api.api_gateway.id
-  stage_name  = aws_api_gateway_stage.deployment_groups_api.stage_name
-  method_path = "*/*"
-
-  settings {
-    metrics_enabled = true
-    logging_level   = "INFO"
-  }
-}
