@@ -1,0 +1,62 @@
+pipeline {
+    agent any
+    tools {
+        "org.jenkinsci.plugins.terraform.TerraformInstallation" "Terraform"
+    }
+
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
+
+    stages {
+        stage('Clean-up') {
+            steps {
+                cleanWs()
+            }
+        }
+        stage('Checkout') {
+            steps {
+                script {
+                    dir('jenkins-terraform-pipeline/jenkins_pipeline/') {
+                        git 'https://github.com/ExePtion31/PruebaTecnicaBocc'
+                    }
+                }
+            }
+        }
+        stage('Init') {
+            steps {
+                dir('jenkins-terraform-pipeline/jenkins_pipeline/'){
+                    sh "terraform -version"
+                    sh "terraform init -input=false"
+                }
+            }
+        }
+        stage('Validate') {
+            steps{
+                dir('jenkins-terraform-pipeline/jenkins_pipeline/'){
+                    sh "terraform validate"
+                }
+            }
+        }
+        stage('Plan') {
+            steps {
+                dir('jenkins-terraform-pipeline/jenkins_pipeline/'){
+                    sh "terraform plan -out=myplan -input=false"
+                }
+            }
+        }
+        stage('Apply') {
+            steps {
+                dir('jenkins-terraform-pipeline/jenkins_pipeline/'){
+                    sh "terraform apply -input=false myplan"
+                }
+            }
+        }
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+    }
+}
