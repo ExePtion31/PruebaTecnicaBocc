@@ -38,13 +38,34 @@ resource "aws_api_gateway_integration_response" "api_gateway_integration_respons
   resource_id = aws_api_gateway_resource.api_gateway_resource.id
   http_method = aws_api_gateway_method.api_gateway_get_method.http_method
   status_code = aws_api_gateway_method_response.response_200.status_code
-  response_templates = {
-        "application/json" = <<EOF
-    #set($inputRoot = $input.path('$'))
-    <?xml version="1.0" encoding="UTF-8"?>
-    <message>
-        $inputRoot.body
-    </message>
-    EOF
+}
+
+#Deployment
+resource "aws_api_gateway_deployment" "deployment_api" {
+  rest_api_id = aws_api_gateway_rest_api.api_gateway.id
+
+  triggers = {
+    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.api_gateway.body))
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_api_gateway_stage" "deployment_groups_api" {
+  deployment_id = aws_api_gateway_deployment.deployment_api.id
+  rest_api_id   = aws_api_gateway_rest_api.api_gateway.id
+  stage_name    = "deployment-groups-api"
+}
+
+resource "aws_api_gateway_method_settings" "deployment_settings_method" {
+  rest_api_id = aws_api_gateway_rest_api.api_gateway.id
+  stage_name  = aws_api_gateway_stage.deployment_groups_api.stage_name
+  method_path = "*/*"
+
+  settings {
+    metrics_enabled = true
+    logging_level   = "INFO"
   }
 }
