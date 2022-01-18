@@ -38,4 +38,7 @@ resource "aws_api_gateway_integration_response" "api_gateway_integration_respons
   resource_id = aws_api_gateway_resource.api_gateway_resource.id
   http_method = aws_api_gateway_method.api_gateway_get_method.http_method
   status_code = aws_api_gateway_method_response.response_200.status_code
+  response_templates = {
+        "application/json" = "Empty"
+  }
 }
