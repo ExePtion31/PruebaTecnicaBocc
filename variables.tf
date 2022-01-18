@@ -16,8 +16,8 @@ variable "instance_type" {
 variable "path_lambda" {
   type = map(string)
   default = {
-    unzip = "./files/index.js"
-    zip = "./files/index.zip"
+    unzip = "./files/lambda/index.js"
+    zip = "./files/lambda/index.zip"
   }
 }
 
