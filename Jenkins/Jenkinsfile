@@ -26,29 +26,28 @@ pipeline {
         }
         stage('Init') {
             steps {
-                dir('jenkins-terraform-pipeline/jenkins_pipeline/'){
-                    sh "terraform -version"
+                dir('jenkins-terraform-pipeline/jenkins_pipeline/aws_infrastructure'){
                     sh "terraform init -input=false"
                 }
             }
         }
         stage('Validate') {
             steps{
-                dir('jenkins-terraform-pipeline/jenkins_pipeline/'){
+                dir('jenkins-terraform-pipeline/jenkins_pipeline/aws_infrastructure'){
                     sh "terraform validate"
                 }
             }
         }
         stage('Plan') {
             steps {
-                dir('jenkins-terraform-pipeline/jenkins_pipeline/'){
+                dir('jenkins-terraform-pipeline/jenkins_pipeline/aws_infrastructure'){
                     sh "terraform plan -out=myplan -input=false"
                 }
             }
         }
         stage('Apply') {
             steps {
-                dir('jenkins-terraform-pipeline/jenkins_pipeline/'){
+                dir('jenkins-terraform-pipeline/jenkins_pipeline/aws_infrastructure'){
                     sh "terraform apply -input=false myplan"
                 }
             }
