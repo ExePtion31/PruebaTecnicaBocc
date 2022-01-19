@@ -10,24 +10,28 @@ exports.handler = async (event) => {
 };
 
 function buildArray(array) {
-  var suma = 0;
-  var sizes = [];
-  var arrayGroups = array["groups"].split(",").map(function (item) {
-    return parseInt(item, 10);
-  });
+  try {
+    var suma = 0;
+    var sizes = [];
+    var arrayGroups = array["groups"].split(",").map(function (item) {
+      return parseInt(item, 10);
+    });
 
-  const mayor = Math.max(...arrayGroups);
+    const mayor = Math.max(...arrayGroups);
 
-  for (let i = 0; i < arrayGroups.length; i++) {
-    suma += arrayGroups[i];
-  }
-
-  for (let index = mayor; index <= suma; index++) {
-    if (suma % index == 0) {
-      sizes.push(String(index));
+    for (let i = 0; i < arrayGroups.length; i++) {
+      suma += arrayGroups[i];
     }
+
+    for (let index = mayor; index <= suma; index++) {
+      if (suma % index == 0) {
+        sizes.push(String(index));
+      }
+    }
+    return sizes.join(",");
+  } catch (error) {
+    return error;
   }
-  return sizes.join(",");
 }
 
 function buildResponse(body) {
