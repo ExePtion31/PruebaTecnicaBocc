@@ -31,5 +31,5 @@ Arquitectura usada para el proyecto
 | Jenkis         | Configuración Jenkins| 
 | Lambda         | Lógica de la Lambda  | 
 
-### Cŕeditos
+#### Cŕeditos
 Proyecto realizado por **Giovanni Baquero Vargas**
