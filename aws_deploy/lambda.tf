@@ -10,13 +10,6 @@ resource "aws_lambda_function" "lambda_groups" {
   depends_on = [
     aws_cloudwatch_log_group.lambda_group_log_group,
   ]
-
-  lifecycle {
-    ignore_changes = [
-      filename,
-      source_code_hash
-    ]
-  }
-
+  
   tags = local.common_tags
 }
