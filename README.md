@@ -28,5 +28,5 @@ Arquitectura usada para el proyecto
 | Recurso        | Descripción          | 
 | -------------- | -------------------- | 
 | aws_deploy     | Infra de AWS         | 
-| Jenkis         | COnfiguracion Jenkins| 
+| Jenkis         | Configuración Jenkins| 
 | Lambda         | Lógica de la Lambda  | 
