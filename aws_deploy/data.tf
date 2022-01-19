@@ -18,6 +18,7 @@ data "aws_iam_policy_document" "lambda_group_assume_role_policy_document" {
   }
 }
 
+# Lambda logs permissions
 data "aws_iam_policy_document" "lambda_group_assume_logs_policy_document" {
   statement {
     sid    = "LambdaTriggerLogs"

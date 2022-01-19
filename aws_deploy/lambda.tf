@@ -1,3 +1,4 @@
+# Provisioning lambda function
 resource "aws_lambda_function" "lambda_groups" {
   function_name    = "${var.stack_id}-groups"
   role             = aws_iam_role.lambda_group_role.arn
