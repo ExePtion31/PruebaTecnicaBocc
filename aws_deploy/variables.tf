@@ -1,7 +1,3 @@
-variable "AWS_REGION"{
-    default = "us-east-2"
-}
-
 variable "ami_id" {
   default = {
     "us-east-2" = "ami-05803413c51f242b7"
