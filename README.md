@@ -30,3 +30,6 @@ Arquitectura usada para el proyecto
 | aws_deploy     | Infra de AWS         | 
 | Jenkis         | Configuración Jenkins| 
 | Lambda         | Lógica de la Lambda  | 
+
+### Cŕeditos
+Proyecto realizado por **Giovanni Baquero Vargas**
