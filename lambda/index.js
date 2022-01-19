@@ -32,7 +32,7 @@ function buildArray(array) {
     }
     return sizes.join(",");
   } catch (error) {
-    return error;
+    return {error};
   }
 }
 
