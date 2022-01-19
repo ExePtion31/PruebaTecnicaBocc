@@ -1,9 +1,18 @@
 exports.handler = async (event) => {
   console.debug("Lambda ejecutada correctamente");
   const values = JSON.parse(event.body);
+  const response = [
+    {
+      sizes: buildArray(values),
+    },
+  ];
+  return buildResponse(JSON.stringify(response));
+};
+
+function buildArray(array) {
   var suma = 0;
   var sizes = [];
-  var arrayGroups = values["groups"].split(",").map(function (item) {
+  var arrayGroups = array["groups"].split(",").map(function (item) {
     return parseInt(item, 10);
   });
 
@@ -18,13 +27,8 @@ exports.handler = async (event) => {
       sizes.push(String(index));
     }
   }
-  const response = [
-    {
-      sizes: sizes.join(","),
-    },
-  ];
-  return buildResponse(JSON.stringify(response));
-};
+  return sizes.join(",");
+}
 
 function buildResponse(body) {
   return {
