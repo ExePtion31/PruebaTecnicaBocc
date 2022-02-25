@@ -31,3 +31,12 @@ data "aws_iam_policy_document" "lambda_group_assume_logs_policy_document" {
     resources = ["arn:aws:logs:*:*:*"]
   }
 }
+
+data "aws_iam_policy_document" "lambda_group_assume_sts_policy_document" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "sts:AssumeRole"
+    ]
+  }
+}
