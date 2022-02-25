@@ -34,12 +34,14 @@ data "aws_iam_policy_document" "lambda_group_assume_logs_policy_document" {
 
 data "aws_iam_policy_document" "lambda_group_assume_sts_policy_document" {
   statement {
+    Sid    = ""
     effect = "Allow"
     actions = [
       "sts:AssumeRole"
     ]
-    Principal = {
-      Service = "lambda.amazonaws.com"
+    principals {
+      type = "Service"
+      identifiers = ["lambda.amazonaws.com"]
     }
   }
 }
