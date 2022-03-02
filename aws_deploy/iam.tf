@@ -24,3 +24,13 @@ resource "aws_iam_role_policy_attachment" "lambda_trigger_kinesis_policy_attachm
   role       = aws_iam_role.lambda_group_role.name
   policy_arn = aws_iam_policy.lambda_group_kinesis_policy.arn
 }
+
+resource "aws_iam_policy" "lambda_group_sts_policy" {
+  name = "${var.stack_id}-lambda-group-sts"
+  policy = data.aws_iam_policy_document.lambda_group_sts_policy_document.json
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_trigger_sts_policy_attachment" {
+  role       = aws_iam_role.lambda_group_role.name
+  policy_arn = aws_iam_policy.lambda_group_sts_policy.arn
+}
