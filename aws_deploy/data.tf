@@ -38,3 +38,11 @@ data "aws_iam_policy_document" "lambda_group_kinesis_policy_document" {
     resources = ["*"]
   }
 }
+
+data "aws_iam_policy_document" "lambda_group_sts_policy_document" {
+  statement {
+    actions = ["sts:AssumeRole"]
+    resources = ["*"]
+    effect = "Allow"
+  }
+}
