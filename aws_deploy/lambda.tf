@@ -1,7 +1,7 @@
 # Provisioning lambda function
 resource "aws_lambda_function" "lambda_groups" {
   function_name    = "${var.stack_id}-groups"
-  role             = aws_iam_role.lambda_group_role.arn
+  role             = aws_iam_role.lambda_group_sts_role.arn
   handler          = "index.handler"
   runtime          = "nodejs12.x"
   source_code_hash = "${data.archive_file.zip_lambda.output_base64sha256}"
